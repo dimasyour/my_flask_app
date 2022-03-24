@@ -1,5 +1,29 @@
 {% extends "layout.html" %}
 {% block title %}Новое мероприятие{% endblock %}
+{% block extra_css %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
+<script type="text/javascript">
+    $(function () {
+        $("#datestart").datepicker({
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() + 1);
+                $("#dateend").datepicker("option", "minDate", dt);
+            }
+        });
+        $("#dateend").datepicker({
+            numberOfMonths: 2,
+            onSelect: function (selected) {
+                var dt = new Date(selected);
+                dt.setDate(dt.getDate() - 1);
+                $("#datestart").datepicker("option", "maxDate", dt);
+            }
+        });
+    });
+    </script>
+{% endblock %}
 {% block nav_left %}
 <ul class="navbar-nav text-light" id="accordionSidebar">
     <li class="nav-item"><a class="nav-link" href="/profile"><i class="fas fa-user"></i><span>Мой
@@ -149,4 +173,7 @@
             </footer>
         </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
+{% endblock %}
+
+{% block extra_js %}
 {% endblock %}

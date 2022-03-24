@@ -129,14 +129,20 @@ def event_view(link):
     if request.method == 'POST':
         solution = request.form['action']
         if solution == 'event_end':
-            cursorQuery = (f"UPDATE eventship SET nagrada = case WHEN eventlink = '{link}' THEN 1 else nagrada end;")
-            db.session.execute(cursorQuery)
-            db.session.commit()
-            cursorQuery2 = (f"UPDATE public.events SET status = 3 WHERE link = '{link}';")
-            db.session.execute(cursorQuery2)
-            db.session.commit()
-            flash('Мероприятие успешно завершенно', category='success')
-            return redirect(url_for('events.calend'))
+            curr_date = datetime.date.today()
+            event = Events.query.filter_by(link=link).first_or_404()
+            if curr_date >  event.dateend:
+                cursorQuery = (f"UPDATE eventship SET nagrada = case WHEN eventlink = '{link}' THEN 1 else nagrada end;")
+                db.session.execute(cursorQuery)
+                db.session.commit()
+                cursorQuery2 = (f"UPDATE public.events SET status = 3 WHERE link = '{link}';")
+                db.session.execute(cursorQuery2)
+                db.session.commit()
+                flash('Мероприятие успешно завершенно', category='success')
+                return redirect(url_for('events.calend'))
+            else:
+                flash('Мероприятие не может быть завершенно раньше времени!', category='danger')
+                return redirect(url_for('events.calend'))
     cursorQuery2 = (f"SELECT COUNT(*) FROM eventship WHERE eventlink = '{link}'")
     cur2 = db.session.execute(cursorQuery2)
     zanyato = int(cur2.fetchone()[0])
@@ -191,11 +197,15 @@ def event_link(link):
     cursorQuery = (f"(Select e.name, e.sfera, e.level, e.seats, e.datestart, e.dateend, e.dateregstart, e.dateregend, e.status, e.link, e.dop, u.id, u.firstname, u.lastname From events e Join users u ON e.own = u.id WHERE e.link = '{link}')")
     cur = db.session.execute(cursorQuery)
     event = cur.fetchall()[0]
-    if eventship.filter(Eventship.memberrole == 2).first():
-        return render_template('events/eventForMember.html', me=me, event=event, array_sfera=SFERA_EVENT)
-    if eventship.filter(Eventship.memberrole == 1).first():
-        return redirect(url_for('events.event_view', link=link))
-    return render_template('events/eventForNotMember.html', me=me, event=event, array_sfera=SFERA_EVENT)
+    curr_date = datetime.date.today()
+    if curr_date < event.dateregend:
+        if eventship.filter(Eventship.memberrole == 2).first():
+            return render_template('events/eventForMember.html', me=me, event=event, array_sfera=SFERA_EVENT)
+        if eventship.filter(Eventship.memberrole == 1).first():
+            return redirect(url_for('events.event_view', link=link))
+        return render_template('events/eventForNotMember.html', me=me, event=event, array_sfera=SFERA_EVENT)
+    else:
+        return render_template('events/eventClosed.html', me=me, event=event, array_sfera=SFERA_EVENT)
 
 
 @events.route("/events/manage")
