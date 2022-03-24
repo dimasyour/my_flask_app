@@ -15,7 +15,8 @@ events = Blueprint('events', __name__)
 
 dt = datetime.datetime.today()
 
-SFERA_EVENT = ['Общественная','Творческая', 'Научная', 'Спортивная']
+SFERA_EVENT = ['Общественная', 'Творческая', 'Научная', 'Спортивная']
+
 
 @events.route('/events/add_event', methods=['GET', 'POST'])
 @login_required
@@ -31,6 +32,19 @@ def events_add_event():
         dateregend = request.form['dateregend']
         dop = request.form['dop']
         link = generate_string(16)
+        curr_date = datetime.date.today().strftime('%Y-%m-%d')
+        if datestart < curr_date:
+            flash('Нельзя начать мероприятие в прошлом!', category='danger')
+            return redirect(url_for("events.events_add_event"))
+        if datestart > dateend:
+            flash('Дата начала не может быть позднее даты окончания мероприятия!', category='danger')
+            return redirect(url_for("events.events_add_event"))
+        if dateregstart > dateregend:
+            flash('Дата начала регистрации не может быть позднее даты завершения регистрации заявок на мероприятие!', category='danger')
+            return redirect(url_for("events.events_add_event"))
+        if dateregstart > datestart or dateregend > datestart:
+            flash('Дата начала/завершения регистрации не может быть позднее даты начала самого мероприятия!', category='danger')
+            return redirect(url_for("events.events_add_event"))
         if current_user.level < 3 and level == 1:
             newEvent = Events(name=name, sfera=sfera, level=level, seats=seats, datestart=datestart, own=current_user.id,
                               dateend=dateend, dateregstart=dateregstart, dateregend=dateregend, moderator=3, status=0, link=link, dop=dop)
@@ -42,7 +56,8 @@ def events_add_event():
         elif current_user.level == 3 and level == 1:
             newEvent = Events(name=name, sfera=sfera, level=level, seats=seats, datestart=datestart, own=current_user.id,
                               dateend=dateend, dateregstart=dateregstart, dateregend=dateregend, moderator=3, status=1, link=link, dop=dop)
-            newEventship = Eventship(eventlink=link, memberid=current_user.id, memberrole=1, nagrada=0)
+            newEventship = Eventship(
+                eventlink=link, memberid=current_user.id, memberrole=1, nagrada=0)
             db.session.add(newEvent)
             db.session.commit()
             db.session.add(newEventship)
@@ -55,7 +70,8 @@ def events_add_event():
         elif current_user.level > 3 and level <= 2:
             newEvent = Events(name=name, sfera=sfera, level=level, seats=seats, datestart=datestart, own=current_user.id,
                               dateend=dateend, dateregstart=dateregstart, dateregend=dateregend, moderator=4, status=1, link=link, dop=dop)
-            newEventship = Eventship(eventlink=link, memberid=current_user.id, memberrole=1, nagrada=0)
+            newEventship = Eventship(
+                eventlink=link, memberid=current_user.id, memberrole=1, nagrada=0)
             db.session.add(newEvent)
             db.session.commit()
             db.session.add(newEventship)
@@ -131,7 +147,7 @@ def event_view(link):
         if solution == 'event_end':
             curr_date = datetime.date.today()
             event = Events.query.filter_by(link=link).first_or_404()
-            if curr_date >  event.dateend:
+            if curr_date > event.dateend:
                 cursorQuery = (f"UPDATE eventship SET nagrada = case WHEN eventlink = '{link}' THEN 1 else nagrada end;")
                 db.session.execute(cursorQuery)
                 db.session.commit()
@@ -141,7 +157,8 @@ def event_view(link):
                 flash('Мероприятие успешно завершенно', category='success')
                 return redirect(url_for('events.calend'))
             else:
-                flash('Мероприятие не может быть завершенно раньше времени!', category='danger')
+                flash(
+                    'Мероприятие не может быть завершенно раньше времени!', category='danger')
                 return redirect(url_for('events.calend'))
     cursorQuery2 = (f"SELECT COUNT(*) FROM eventship WHERE eventlink = '{link}'")
     cur2 = db.session.execute(cursorQuery2)
@@ -157,12 +174,14 @@ def event_view(link):
 @events.route("/e_<string:link>", methods=['GET', 'POST'])
 @login_required
 def event_link(link):
-    eventship = Eventship.query.filter(Eventship.eventlink == link).filter(Eventship.memberid == current_user.id)
+    eventship = Eventship.query.filter(Eventship.eventlink == link).filter(
+        Eventship.memberid == current_user.id)
     if request.method == 'POST':
         solution = request.form['solution']
         if solution == 'plus':
             if eventship.filter(Eventship.memberrole == 1).first():
-                flash('Вы являетесь организатором и не можете понизиться до участника', category='danger')
+                flash(
+                    'Вы являетесь организатором и не можете понизиться до участника', category='danger')
                 return redirect(url_for("events.calend"))
             elif eventship.filter(Eventship.memberrole == 2).first():
                 flash('Вы уже участвуйте в этом мероприятии', category='danger')
@@ -172,7 +191,8 @@ def event_link(link):
             cur2 = db.session.execute(cursorQuery2)
             zanyato = int(cur2.fetchone()[0])
             if not eventship.filter(Eventship.memberid == current_user.id).first() and event.seats - zanyato > 0:
-                newEventship = Eventship(eventlink=link, memberid=current_user.id, memberrole=2, nagrada=0)
+                newEventship = Eventship(
+                    eventlink=link, memberid=current_user.id, memberrole=2, nagrada=0)
                 db.session.add(newEventship)
                 db.session.commit()
             if event.seats - zanyato > 0:
@@ -186,7 +206,8 @@ def event_link(link):
                 return redirect(url_for("events.calend"))
         elif solution == 'minus':
             if Eventship.query.filter(Eventship.eventlink == link).filter(Eventship.memberid == current_user.id).filter(Eventship.memberrole == 1).first():
-                flash('Вы являетесь организатором и не можете отказаться от участия', category='danger')
+                flash(
+                    'Вы являетесь организатором и не можете отказаться от участия', category='danger')
                 return redirect(url_for("events.calend"))
             cursorQuery = (f"UPDATE eventship SET memberrole = 0 WHERE eventlink = '{link}' AND memberid = {current_user.id};")
             db.session.execute(cursorQuery)
