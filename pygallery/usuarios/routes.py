@@ -1,6 +1,7 @@
 from array import array
 import os
 import json
+from unicodedata import category
 from urllib import response
 from flask import Blueprint, render_template, redirect, request, url_for, flash, current_app, abort, session, jsonify, make_response
 from flask_login import login_user, current_user, logout_user, login_required
@@ -38,13 +39,15 @@ def login():
     if request.method == "POST":
         email = request.form['email']
         password = request.form['password']
+        remember_me = request.form.getlist('remember_me')
         curr_user = Users.query.filter_by(email=email).first()
         if curr_user:
             hashpass = md5(password.encode('utf-8'))
             md5_hashpass = hashpass.hexdigest()
             if md5_hashpass == curr_user.password:
-                login_user(curr_user)
-                session["id"] = curr_user.id
+                login_user(curr_user, remember_me)
+                if remember_me == 'remember_me':
+                    session["id"] = curr_user.id
                 return redirect(url_for("usuarios.profile"))
             else:
                 flash("Неверная пара логина и пароля!", category='danger')
@@ -98,6 +101,7 @@ def register():
 @usuarios.route("/logout")
 def logout():
     logout_user()
+    session.clear()
     return redirect(url_for('main.home'))
 
 
@@ -112,7 +116,7 @@ def profile():
     return render_template('profile.html', me=me, level_array=level_array, data=data_math, data2=data_math_all)
 
 
-@usuarios.route("/profile/settings")
+@usuarios.route("/profile/settings", methods=['GET', 'POST'])
 @login_required
 def profile_settings():
     DEPARTMENT = [
@@ -127,6 +131,17 @@ def profile_settings():
         ['СГСПУ-9', 'ФНО', 'Факультет начального образования'],
         ['СГСПУ-10', 'ЕГФ', 'Естественно-географический факультет'],
     ]
+    if request.method == 'POST':
+        if 'upload_info' in request.form:
+            flash('Заявка на обновление информации отправлена!', category='success')
+            data_math = math_plus(current_user.id)
+            me = Users.query.filter_by(id=current_user.id).first_or_404()
+            return render_template('profile/settings.html', me=me, data=data_math, array_department=DEPARTMENT)
+        if 'update_department' in request.form:
+            flash('Заявка на обновление факультета отправлена!', category='success')
+            data_math = math_plus(current_user.id)
+            me = Users.query.filter_by(id=current_user.id).first_or_404()
+            return render_template('profile/settings.html', me=me, data=data_math, array_department=DEPARTMENT)
     data_math = math_plus(current_user.id)
     me = Users.query.filter_by(id=current_user.id).first_or_404()
     return render_template('profile/settings.html', me=me, data=data_math, array_department=DEPARTMENT)
@@ -227,7 +242,8 @@ def get_pgas():
                 'nagrada': p.nagrada
             })
         resp = jsonify(data)
-        res = render_template('pgas.html')
+        print(data)
+        res = render_template('pgas.html', data=data)
         responsestring = pdfkit.from_string(res, False)
         response = make_response(responsestring)
         response.headers['Content-Type'] = 'application/pdf'

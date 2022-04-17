@@ -157,14 +157,15 @@ def event_view(link):
                 flash('Мероприятие успешно завершенно', category='success')
                 return redirect(url_for('events.calend'))
             else:
-                flash(
-                    'Мероприятие не может быть завершенно раньше времени!', category='danger')
+                flash('Мероприятие не может быть завершенно раньше времени!', category='danger')
                 return redirect(url_for('events.calend'))
+    me = Users.query.filter_by(id=current_user.id).first_or_404()
+    event = Events.query.filter_by(link=link).first_or_404()
+    if event.status == 3:
+        return render_template('events/event.html', me=me, event=event)
     cursorQuery2 = (f"SELECT COUNT(*) FROM eventship WHERE eventlink = '{link}'")
     cur2 = db.session.execute(cursorQuery2)
     zanyato = int(cur2.fetchone()[0])
-    event = Events.query.filter_by(link=link).first_or_404()
-    me = Users.query.filter_by(id=current_user.id).first_or_404()
     cursorQuery = (f"SELECT id, firstname, lastname, memberrole FROM users JOIN eventship ON eventship.eventlink = '{link}' and eventship.memberid = users.id")
     cur = db.session.execute(cursorQuery)
     records = cur.fetchall()
@@ -331,7 +332,7 @@ def calend():
                 'title': p.name,
                 'start_date': p.datestart,
                 'end_date': p.dateend,
-                'url': 'https://vkapi.me/e_' + p.link,
+                'url': 'https://myped.ru/e_' + p.link,
                 'color': category
             })
     return render_template('calend.html', me=me, events=data)

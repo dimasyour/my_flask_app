@@ -1,0 +1,384 @@
+ERROR:pygallery:Exception on /login [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/dimasyour/my_flask_app/pygallery/usuarios/routes.py", line 43, in login
+    curr_user = Users.query.filter_by(email=email).first()
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 2760, in first
+    return self.limit(1)._iter().first()
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 2847, in _iter
+    execution_options={"_sa_orm_load_options": self.load_options},
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1582, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/sql/elements.py", line 324, in _execute_on_connection
+    self, multiparams, params, execution_options
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1461, in _execute_clauseelement
+    cache_hit=cache_hit,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1814, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1995, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.firstname AS users_firstname, users.lastname AS users_lastname, users.email AS users_email, users.uzname AS users_uzname, users.level AS users_level, users.password AS users_password, users.department AS users_department, users.avatar AS users_avatar, users.created_on AS users_created_on 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'fizmt@mail.ru', 'param_1': 1}]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
+ERROR:pygallery:Exception on /login [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/dimasyour/my_flask_app/pygallery/usuarios/routes.py", line 43, in login
+    curr_user = Users.query.filter_by(email=email).first()
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 2760, in first
+    return self.limit(1)._iter().first()
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 2847, in _iter
+    execution_options={"_sa_orm_load_options": self.load_options},
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1582, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/sql/elements.py", line 324, in _execute_on_connection
+    self, multiparams, params, execution_options
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1461, in _execute_clauseelement
+    cache_hit=cache_hit,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1814, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1995, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.firstname AS users_firstname, users.lastname AS users_lastname, users.email AS users_email, users.uzname AS users_uzname, users.level AS users_level, users.password AS users_password, users.department AS users_department, users.avatar AS users_avatar, users.created_on AS users_created_on 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'fizmt@mail.ru', 'param_1': 1}]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
+ERROR:pygallery:Exception on / [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/dimasyour/my_flask_app/pygallery/main/routes.py", line 12, in home
+    if current_user.is_authenticated:
+  File "/usr/local/lib/python3.6/dist-packages/werkzeug/local.py", line 422, in __get__
+    obj = instance._get_current_object()
+  File "/usr/local/lib/python3.6/dist-packages/werkzeug/local.py", line 544, in _get_current_object
+    return self.__local()  # type: ignore
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/utils.py", line 346, in _get_user
+    current_app.login_manager._load_user()
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/login_manager.py", line 318, in _load_user
+    user = self._user_callback(user_id)
+  File "/home/dimasyour/my_flask_app/pygallery/usuarios/routes.py", line 32, in load_user
+    return Users.query.get(int(user_id))
+  File "<string>", line 2, in get
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/deprecations.py", line 390, in warned
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 942, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 954, in _get_impl
+    execution_options=self._execution_options,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 2843, in _get_impl
+    load_options=load_options,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/loading.py", line 535, in load_on_pk_identity
+    bind_arguments=bind_arguments,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1582, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/sql/elements.py", line 324, in _execute_on_connection
+    self, multiparams, params, execution_options
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1461, in _execute_clauseelement
+    cache_hit=cache_hit,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1814, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1995, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.firstname AS users_firstname, users.lastname AS users_lastname, users.email AS users_email, users.uzname AS users_uzname, users.level AS users_level, users.password AS users_password, users.department AS users_department, users.avatar AS users_avatar, users.created_on AS users_created_on 
+FROM users 
+WHERE users.id = %(pk_1)s]
+[parameters: {'pk_1': 1}]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
+ERROR:pygallery:Exception on / [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/dimasyour/my_flask_app/pygallery/main/routes.py", line 12, in home
+    if current_user.is_authenticated:
+  File "/usr/local/lib/python3.6/dist-packages/werkzeug/local.py", line 422, in __get__
+    obj = instance._get_current_object()
+  File "/usr/local/lib/python3.6/dist-packages/werkzeug/local.py", line 544, in _get_current_object
+    return self.__local()  # type: ignore
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/utils.py", line 346, in _get_user
+    current_app.login_manager._load_user()
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/login_manager.py", line 318, in _load_user
+    user = self._user_callback(user_id)
+  File "/home/dimasyour/my_flask_app/pygallery/usuarios/routes.py", line 32, in load_user
+    return Users.query.get(int(user_id))
+  File "<string>", line 2, in get
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/deprecations.py", line 390, in warned
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 942, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 954, in _get_impl
+    execution_options=self._execution_options,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 2843, in _get_impl
+    load_options=load_options,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/loading.py", line 535, in load_on_pk_identity
+    bind_arguments=bind_arguments,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1582, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/sql/elements.py", line 324, in _execute_on_connection
+    self, multiparams, params, execution_options
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1461, in _execute_clauseelement
+    cache_hit=cache_hit,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1814, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1995, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.firstname AS users_firstname, users.lastname AS users_lastname, users.email AS users_email, users.uzname AS users_uzname, users.level AS users_level, users.password AS users_password, users.department AS users_department, users.avatar AS users_avatar, users.created_on AS users_created_on 
+FROM users 
+WHERE users.id = %(pk_1)s]
+[parameters: {'pk_1': 1}]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
+ERROR:pygallery:Exception on /calend [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/dimasyour/my_flask_app/pygallery/events/routes.py", line 318, in calend
+    me = Users.query.filter_by(id=current_user.id).first_or_404()
+  File "/usr/local/lib/python3.6/dist-packages/werkzeug/local.py", line 422, in __get__
+    obj = instance._get_current_object()
+  File "/usr/local/lib/python3.6/dist-packages/werkzeug/local.py", line 544, in _get_current_object
+    return self.__local()  # type: ignore
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/utils.py", line 346, in _get_user
+    current_app.login_manager._load_user()
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/login_manager.py", line 318, in _load_user
+    user = self._user_callback(user_id)
+  File "/home/dimasyour/my_flask_app/pygallery/usuarios/routes.py", line 32, in load_user
+    return Users.query.get(int(user_id))
+  File "<string>", line 2, in get
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/deprecations.py", line 390, in warned
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 942, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 954, in _get_impl
+    execution_options=self._execution_options,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 2843, in _get_impl
+    load_options=load_options,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/loading.py", line 535, in load_on_pk_identity
+    bind_arguments=bind_arguments,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1582, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/sql/elements.py", line 324, in _execute_on_connection
+    self, multiparams, params, execution_options
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1461, in _execute_clauseelement
+    cache_hit=cache_hit,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1814, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1995, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.firstname AS users_firstname, users.lastname AS users_lastname, users.email AS users_email, users.uzname AS users_uzname, users.level AS users_level, users.password AS users_password, users.department AS users_department, users.avatar AS users_avatar, users.created_on AS users_created_on 
+FROM users 
+WHERE users.id = %(pk_1)s]
+[parameters: {'pk_1': 1}]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)
+ERROR:pygallery:Exception on / [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.OperationalError: SSL SYSCALL error: EOF detected
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.6/dist-packages/flask/app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/dimasyour/my_flask_app/pygallery/main/routes.py", line 12, in home
+    if current_user.is_authenticated:
+  File "/usr/local/lib/python3.6/dist-packages/werkzeug/local.py", line 422, in __get__
+    obj = instance._get_current_object()
+  File "/usr/local/lib/python3.6/dist-packages/werkzeug/local.py", line 544, in _get_current_object
+    return self.__local()  # type: ignore
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/utils.py", line 26, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/utils.py", line 346, in _get_user
+    current_app.login_manager._load_user()
+  File "/usr/local/lib/python3.6/dist-packages/flask_login/login_manager.py", line 318, in _load_user
+    user = self._user_callback(user_id)
+  File "/home/dimasyour/my_flask_app/pygallery/usuarios/routes.py", line 32, in load_user
+    return Users.query.get(int(user_id))
+  File "<string>", line 2, in get
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/deprecations.py", line 390, in warned
+    return fn(*args, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 942, in get
+    return self._get_impl(ident, loading.load_on_pk_identity)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/query.py", line 954, in _get_impl
+    execution_options=self._execution_options,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 2843, in _get_impl
+    load_options=load_options,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/loading.py", line 535, in load_on_pk_identity
+    bind_arguments=bind_arguments,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/orm/session.py", line 1689, in execute
+    result = conn._execute_20(statement, params or {}, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1582, in _execute_20
+    return meth(self, args_10style, kwargs_10style, execution_options)
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/sql/elements.py", line 324, in _execute_on_connection
+    self, multiparams, params, execution_options
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1461, in _execute_clauseelement
+    cache_hit=cache_hit,
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1814, in _execute_context
+    e, statement, parameters, cursor, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1995, in _handle_dbapi_exception
+    sqlalchemy_exception, with_traceback=exc_info[2], from_=e
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/util/compat.py", line 207, in raise_
+    raise exception
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/base.py", line 1771, in _execute_context
+    cursor, statement, parameters, context
+  File "/usr/local/lib/python3.6/dist-packages/sqlalchemy/engine/default.py", line 717, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL SYSCALL error: EOF detected
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.firstname AS users_firstname, users.lastname AS users_lastname, users.email AS users_email, users.uzname AS users_uzname, users.level AS users_level, users.password AS users_password, users.department AS users_department, users.avatar AS users_avatar, users.created_on AS users_created_on 
+FROM users 
+WHERE users.id = %(pk_1)s]
+[parameters: {'pk_1': 1}]
+(Background on this error at: http://sqlalche.me/e/14/e3q8)

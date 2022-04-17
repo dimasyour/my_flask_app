@@ -2,9 +2,9 @@
 {% block title %}{{event.name}}{% endblock %}
 {% block nav_left %}
 <ul class="navbar-nav text-light" id="accordionSidebar">
-    <li class="nav-item"><a class="nav-link active" href="/profile"><i class="fas fa-user"></i><span>Мой
+    <li class="nav-item"><a class="nav-link" href="/profile"><i class="fas fa-user"></i><span>Мой
         профиль</span></a></li>
-    <li class="nav-item"><a class="nav-link" href="/events/my"><i
+    <li class="nav-item"><a class="nav-link active" href="/events/my"><i
         class="fas fa-briefcase"></i><span>Мои мероприятия</span></a></li>
     <li class="nav-item"><a class="nav-link" href="/calend"><i
         class="fas fa-calendar"></i><span>Календарь мероприятий</span></a></li>
@@ -32,6 +32,8 @@
                                         {% elif event.status == 1 %}
                                         <div class="card-header py-3 bg-success">
                                         {% elif event.status == 2 %}
+                                        <div class="card-header py-3 bg-danger">
+                                        {% elif event.status == 3 %}
                                         <div class="card-header py-3 bg-danger">
                                         {% endif %}
                                             <h5 class="text-light m-0 fw-bold">&#171;{{event.name}}&#187;</h5>

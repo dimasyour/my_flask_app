@@ -13,6 +13,11 @@ def home():
         return redirect(url_for('usuarios.profile'))
     return render_template('index.html')
 
+@main.route("/info")
+def info():
+    return render_template('info.html')
+
+
 @main.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(current_app.root_path, 'static'), 'favicon.ico', mimetype='image/vnd.microsoft.icon')

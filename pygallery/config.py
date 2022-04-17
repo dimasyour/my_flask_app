@@ -6,6 +6,10 @@ class Config():
     #                                      + os.environ['DB_PASSWORD']+ "@" 
     #                                      + os.environ['DB_HOST'] 
     #                                      + ":5432/dbdimasyour")
+    SQLALCHEMY_POOL_RECYCLE = 35  # value less than backend’s timeout
+    SQLALCHEMY_POOL_TIMEOUT = 7  # value less than backend’s timeout
+    SQLALCHEMY_PRE_PING = True
+    SQLALCHEMY_ENGINE_OPTIONS = {'pool_recycle': SQLALCHEMY_POOL_RECYCLE, 'pool_timeout': SQLALCHEMY_POOL_TIMEOUT, 'pool_pre_ping': SQLALCHEMY_PRE_PING}
     SQLALCHEMY_DATABASE_URI = "postgresql://dimasyour:2010Dima@ls-1df9aef13459a18113cb0653831ba1e0acc7bf34.cfjjo2nbfwt5.eu-north-1.rds.amazonaws.com:5432/dbdimasyour"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = 'smtp.googlemail.com'

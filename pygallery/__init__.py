@@ -11,8 +11,9 @@ db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 login_manager.login_view = 'usuarios.login'
-login_manager.login_message = 'Debes iniciar sesion para acceder a esta pagina.'
+login_manager.login_message = 'Вы должны авторизоваться, чтобы получить доступ к этой странице!'
 login_manager.login_message_category = 'info'
+login_manager.session_protection = 'strong'
 
 mail = Mail()
 

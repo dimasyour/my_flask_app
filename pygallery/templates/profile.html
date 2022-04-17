@@ -61,7 +61,7 @@
                 {% endwith %}
             </div>
         </div>
-        <div class="col">
+        <div class="col-sm">
             <h4 class="text-end text-primary">{{level_array[me.level]}}</h2>
         </div>
     </div>
@@ -202,7 +202,7 @@
                                 </label>
                             </div>
                             <div class="mb-2"><label class="form-label" for="address">
-                                    <p><strong>Количество ваших заявок в обработке:</strong>
+                                    <p><strong>Количество ваших принятых заявок:</strong>
                                         {{data2[1]}}</p>
                                 </label>
                             </div>
@@ -220,7 +220,7 @@
                         <div class="card-body">
                             <form id="get_pgas-form" action="/get_pgas" method="POST">
                                 <div class="mb-3">
-                                    <button class="btn btn-primary" type="submit" id="action" name="action" value="get_pgas">Получить заявку на ПГАС</button>
+                                    <button class="btn btn-primary" type="submit" id="action" name="action" value="get_pgas">Сформировать заявление на ПГАС</button>
                                 </div>
                             </form>
                         </div>
